@@ -1,7 +1,7 @@
 sqlitepg/*.sqlite3
 sqlitepg/media/*
 .venv/*
-
+sqlitepg/components/*
 sqlitepg/sqlitepg/__pycache__/*.pyc
 sqlitepg/crud/__pycache__/*.pyc
 sqlitepg/crud/migrations/__pycache__/*.pyc

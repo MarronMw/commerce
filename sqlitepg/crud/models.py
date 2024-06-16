@@ -1,5 +1,4 @@
 from django.db import models  # type: ignore
-import sqlite3
 
 # Create your models here.
 
@@ -18,7 +17,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=50)
     price = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, default="default.png")
     category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
                                  default="default"
