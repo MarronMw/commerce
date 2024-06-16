@@ -12,101 +12,20 @@
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">ZeeShop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'crud:index' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav> -->
+
     {% include 'components/usernavbar.html' %}
-    <div class="d-flex">
-        <div class="sidebar p-3">
-            <h4>Dashboard</h4>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt"></i> Overview</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url  'crud:customer_orders' customers.customer_No %}"><i
-                            class="fas fa-shopping-cart"></i> Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-heart"></i> MyCart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-cog"></i> Settings</a>
-                </li>
-            </ul>
-        </div>
-        <!-- OTHER DATA -->
-        <div class="container-fluid">
-            <div class="row mb-4 mt-3">
-                <div class="col-md-6 content-container">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 style="text-transform: capitalize;">my orders</h5>
-                        </div>
-                        <div class="card-body">
+    {% include 'components/usersidebar.html' %}
 
-                            <h1>{{customers.order_set.all.count}}</h1>
-                            <a href="{% url 'crud:customer_orders' customers.customer_No %}">view all orders</a>
+    <!-- OTHER DATA -->
+    <div class="container-fluid">
+        {% include 'components/userorderCount.html' %}
+        {% include 'components/usercartCount.html' %}
+    </div>
+    {% include 'components/userprofile.html' %}
+    <!-- {% include 'components/support.html' %} -->
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 content-container">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 style="text-transform: capitalize;">my cart</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1>{{customers.order_set.all.count}}</h1>
-                            <a href="#">view detailed</a>
 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Profile</h5>
-                        </div>
-                        <div class="card-body">
-                            <p style="text-transform: capitalize;">{{customers.customer_name}}</p>
-                            <p>Email: {{customers.email}}</p>
-                            <p>Phone: {{customers.contact}}</p>
-                            <button class="btn btn-secondary">Edit Profile</button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Support</h5>
-                        </div>
-                        <div class="card-body">
-                            <button class="btn btn-info">Contact Support</button>
-                            <button class="btn btn-warning">FAQ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
