@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{customers.customer_name}} Orders</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">ZeeShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> {{customer.customer_name}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crud:index' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex">
+        <div class="sidebar p-3">
+            <h4>Dashboard</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt"></i> Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-heart"></i> MyCart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-cog"></i> Settings</a>
+                </li>
+            </ul>
+        </div>
+        <!-- OTHER DATA -->
+        <div class="container-fluid">
+            <div class="row mb-4 mt-3">
+                <div class="col-md-6 content-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 style="text-transform: capitalize;">my orders</h5>
+                        </div>
+                        <div class="card-body">
+                            <table>
+                                <tr>
+                                    <th>OderID</th>
+                                    <th>OrderDate</th>
+                                    <th>Status</th>
+                                    <th>Tax</th>
+                                    <th>Total Price</th>
+                                </tr>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>{{order.order_No}}</td>
+                                    <td>{{order.order_Date}}</td>
+                                    <td style="text-transform: capitalize;">{{order.order_Status}}</td>
+                                    <td>{{item.product}}</td>
+                                    <td>${{order.total_Price}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                            <a>view more</a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
