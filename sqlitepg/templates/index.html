@@ -107,11 +107,14 @@
                     <!-- <img src="{{product.image.url}}" class="card-img-top " alt="image of {{product.product_name}}"
                         style="height: 250px; "> -->
                     <div class="card-body">
-                        <h5 class="card-title">{{product.product_name}}</h5>
-                        <p class="card-text">MK{{product.price}}</p>
-                        <div class="container mt-5">
-                            <a href="#" class="btn btn-primary">Buy Now</a>
-                            <i class="fas fa-shopping-cart btn btn-primary" style="color: pink;"></i>
+                        <h5 style="text-transform: capitalize;" class="card-title">{{product.product_name}}</h5>
+                        <p style="font-weight: 600;" class="card-text">${{product.price}}.00</p>
+                        <div style="
+                        display: flex;
+                        justify-content: center;
+                        " class="container mt-5">
+                            <a href="{% url 'crud:checkout' product.product_No %}" class="btn btn-primary">Quick Buy</a>
+                            <!-- <i class="fas fa-shopping-cart btn btn-primary" style="color: pink;"></i> -->
                         </div>
                     </div>
                 </div>
