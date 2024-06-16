@@ -18,7 +18,7 @@ def hello(request):
 
 
 def index(request):
-    products = Product.objects.all()[:5]
+    products = Product.objects.all()
     context = {
         'products': products
     }
@@ -37,14 +37,16 @@ def submitted_data(request):
     email = request.POST["email"]
     pwd = request.POST["pwd"]
 
-# continue the logic,yatheka
-    try:
-        customers = Customer.objects.get(email=email, password=pwd)
-        return customer(request, customers.customer_No)
-    except (KeyError, Customer.DoesNotExist):
-        return render(request, 'login.html', {
+    if request.method == "POST":
+        try:
+            customers = Customer.objects.get(email=email, password=pwd)
+            return customer(request, customers.customer_No)
+        except (KeyError, Customer.DoesNotExist):
+            return render(request, 'login.html', {
 
-        })
+            })
+    else:
+        return render(request, 'login.html', {})
 
 
 def signup_submitted_data(request):
