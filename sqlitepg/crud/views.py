@@ -18,7 +18,7 @@ def hello(request):
 
 
 def index(request):
-    products = Product.objects.all()
+    products = Product.objects.all()[::-1][:4]
     context = {
         'products': products
     }
