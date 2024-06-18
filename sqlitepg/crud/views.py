@@ -121,9 +121,20 @@ def customer_orders(request, pk):
 
     context = {
         'orders': orders,
-        'customer': customer,
+        'customers': customer,
     }
     return render(request, "customer_orders.html", context)
+
+
+def customer_cart(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    cart = customer.cart_set.all()
+
+    context = {
+        'cart': cart,
+        'customers': customer,
+    }
+    return render(request, "customer_cart.html", context)
 
 
 # CHECKOUT ON PRODUCTS

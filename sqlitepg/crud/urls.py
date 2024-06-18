@@ -19,6 +19,8 @@ urlpatterns = [
     path('customers/<str:pk>', views.customer, name="customer"),
     path('customer_order/<str:pk>', views.customer_orders,
          name="customer_orders"),  # customer_orders
+    path('customer_cart/<str:pk>', views.customer_cart,
+         name="customer_cart"),  # customer_orders
     path('data/', views.submitted_data, name="data"),
 
     path('hello/', views.hello, name="hello"),
