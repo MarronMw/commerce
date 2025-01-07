@@ -1,4 +1,4 @@
-Here's a list of tables and functionalities required for a basic e-commerce system:
+
 
 **Tables:**
 
