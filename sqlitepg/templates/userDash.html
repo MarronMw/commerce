@@ -33,7 +33,7 @@
           <img
             src="{{customer.image.url}}"
             alt="Avatar"
-            class="w-8 h-8 rounded-full border-2 border-blue-400"
+            class="w-8 h-8 rounded-full border-2 border-blue-400 object-cover"
           />
         </div>
       </div>
@@ -47,7 +47,8 @@
             <img
               src="{{customer.image.url}}"
               alt="User"
-              class="w-20 h-20 rounded-full border-4 border-blue-200 mb-2"
+              class="w-20 h-20 rounded-full border-4 border-blue-200 mb-2 object-cover"
+              style="object-fit: cover"
             />
             <h2 class="text-lg font-semibold text-blue-700">
               {{ customer.customer_name}}

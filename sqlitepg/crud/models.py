@@ -36,7 +36,7 @@ class Customer(models.Model):
     password = models.CharField(max_length=16, null=False)
     shipping_address = models.CharField(max_length=60)
     contact = models.CharField(max_length=14)
-    image = models.ImageField(default="default.png", blank=True)
+    image = models.ImageField(default="default.png", blank=True,upload_to='profile_pics/')
 
     def __str__(self):
         return self.customer_name
