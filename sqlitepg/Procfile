@@ -1,1 +1,2 @@
-web: gunicorn sqlitepg.wsgi
+web: gunicorn sqlitepg.wsgi:application --chdir sqlitepg
+
