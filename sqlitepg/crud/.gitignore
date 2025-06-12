@@ -1,0 +1,2 @@
+migrations/*
+!migrations/_init__.py
