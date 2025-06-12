@@ -40,6 +40,11 @@ def submitted_data(request):
     if request.method == "POST":
         try:
             customers = Customer.objects.get(email=email, password=pwd)
+            context={
+                'customer': customers,
+            }
+            if customer:
+                return render(request,'userDash.html',context)
             return customer(request, customers.customer_No)
         except (KeyError, Customer.DoesNotExist):
             return render(request, 'login.html', {

@@ -1,101 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{customer.customer_name}} dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">E-Commerce</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="text-2xl font-bold text-blue-700">Zee Shop</a>
+        <nav class="space-x-6 hidden md:block">
+          <a href="#" class="text-gray-700 hover:text-blue-700 font-medium"
+            >Home</a
+          >
+          <a href="#" class="text-gray-700 hover:text-blue-700 font-medium"
+            >Shop</a
+          >
+          <a href="#" class="text-gray-700 hover:text-blue-700 font-medium"
+            >Contact</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+          <span class="hidden sm:block text-gray-600"
+            >Hello, {{ user.username }}</span
+          >
+          <img
+            src="{% static 'avatar.png' %}"
+            alt="Avatar"
+            class="w-8 h-8 rounded-full border-2 border-blue-400"
+          />
         </div>
-    </nav>
+      </div>
+    </header>
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action">Orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Wishlist</a>
-                    <a href="#" class="list-group-item list-group-item-action">Account Settings</a>
-                    <a href="{% url 'crud:index' %}" class="list-group-item list-group-item-action">Logout</a>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Welcome, [User Name]</h5>
-                        <p class="card-text">This is your account dashboard where you can view your recent orders,
-                            manage your wishlist, and update your account settings.</p>
-
-                        <h6>Recent Orders</h6>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Order #</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for order in salesOrders %}
-                                <tr>
-                                    <td>{{order.order_No}}</td>
-                                    <td>{{order.order_Date}}</td>
-                                    <td>Shipped</td>
-                                    <td>$150.00</td>
-                                    <td><a href="#" class="btn btn-primary btn-sm">View</a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-
-                        <h6>Account Details</h6>
-                        <form>
-                            <div class="mb-3">
-                                <label for="accountEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="accountEmail" value="user@example.com"
-                                    required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="accountPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="accountPassword" value="********"
-                                    required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-8">
+      <!-- Sidebar -->
+      <aside class="md:w-1/4 w-full">
+        <div class="bg-white rounded-xl shadow p-6 sticky top-8">
+          <div class="flex flex-col items-center mb-6">
+            <img
+              src="{% static 'avatar.png' %}"
+              alt="User"
+              class="w-20 h-20 rounded-full border-4 border-blue-200 mb-2"
+            />
+            <h2 class="text-lg font-semibold text-blue-700">
+              {{ user.get_full_name|default:user.username }}
+            </h2>
+            <p class="text-gray-500 text-sm">{{ user.email }}</p>
+          </div>
+          <nav class="flex flex-col gap-2">
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 rounded-lg bg-blue-100 text-blue-700 font-semibold"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6m-6 0v6m0 0H7m6 0h6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Dashboard
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Orders
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M5 13l4 4L19 7"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Wishlist
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 4v16m8-8H4"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Account Settings
+            </a>
+            <a
+              href="{% url 'crud:index' %}"
+              class="flex items-center px-4 py-2 rounded-lg hover:bg-red-50 text-red-600"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17 16l4-4m0 0l-4-4m4 4H7"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Logout
+            </a>
+          </nav>
         </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="md:w-3/4 w-full">
+        <div class="bg-white rounded-xl shadow p-8">
+          <!-- Greeting -->
+          <div class="mb-8">
+            <h1 class="text-3xl font-bold text-blue-700 mb-2">
+              Welcome back, {{ user.get_full_name|default:user.username }}!
+            </h1>
+            <p class="text-gray-600">
+              Here’s a summary of your recent activity and account details.
+            </p>
+          </div>
+
+          <!-- Dashboard Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+            <div class="bg-blue-50 rounded-lg p-5 flex flex-col items-center">
+              <span class="text-2xl font-bold text-blue-700"
+                >{{ salesOrders|length }}</span
+              >
+              <span class="text-gray-500">Orders</span>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-5 flex flex-col items-center">
+              <span class="text-2xl font-bold text-blue-700">3</span>
+              <span class="text-gray-500">Wishlist</span>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-5 flex flex-col items-center">
+              <span class="text-2xl font-bold text-blue-700">Active</span>
+              <span class="text-gray-500">Account Status</span>
+            </div>
+          </div>
+
+          <!-- Recent Orders Table -->
+          <section class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-semibold text-gray-800">Recent Orders</h2>
+              <a href="#" class="text-blue-600 hover:underline text-sm"
+                >View all</a
+              >
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white rounded-lg">
+                <thead>
+                  <tr class="bg-blue-50">
+                    <th
+                      class="px-4 py-2 text-left text-xs font-semibold text-gray-600"
+                    >
+                      Order #
+                    </th>
+                    <th
+                      class="px-4 py-2 text-left text-xs font-semibold text-gray-600"
+                    >
+                      Date
+                    </th>
+                    <th
+                      class="px-4 py-2 text-left text-xs font-semibold text-gray-600"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="px-4 py-2 text-left text-xs font-semibold text-gray-600"
+                    >
+                      Total
+                    </th>
+                    <th class="px-4 py-2"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in salesOrders %}
+                  <tr class="border-b">
+                    <td class="px-4 py-2">{{ order.order_No }}</td>
+                    <td class="px-4 py-2">{{ order.order_Date }}</td>
+                    <td class="px-4 py-2">
+                      <span
+                        class="inline-block px-2 py-1 rounded-full text-xs font-semibold {% if order.status == 'Shipped' %} bg-green-100 text-green-700 {% elif order.status == 'Pending' %} bg-yellow-100 text-yellow-700 {% else %} bg-gray-100 text-gray-700 {% endif %}"
+                      >
+                        {{ order.status|default:"Shipped" }}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2">
+                      ${{ order.total|default:"150.00" }}
+                    </td>
+                    <td class="px-4 py-2">
+                      <a href="#" class="text-blue-600 hover:underline text-sm"
+                        >View</a
+                      >
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="5" class="px-4 py-6 text-center text-gray-400">
+                      No orders found.
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Account Details -->
+          <section>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">
+              Account Details
+            </h2>
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  for="accountName"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="accountName"
+                  value="{{ user.get_full_name|default:user.username }}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="accountEmail"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  id="accountEmail"
+                  value="{{ user.email }}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="accountPassword"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  id="accountPassword"
+                  value="********"
+                  class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div class="flex items-end">
+                <button
+                  type="submit"
+                  class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full md:w-auto"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+  </body>
 </html>
