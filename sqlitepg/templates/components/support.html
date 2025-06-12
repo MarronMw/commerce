@@ -1,0 +1,19 @@
+<!-- support.html: Password Reset Support Component -->
+<div class="support-forgot-password">
+  <h2>Forgot Your Password?</h2>
+  <form method="post" action="/reset-password">
+    <label for="email">Enter your email address:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      placeholder="you@example.com"
+    />
+    <button type="submit">Send Reset Link</button>
+  </form>
+  <p>
+    If you no longer have access to your email, please
+    <a href="/contact-support">contact support</a>.
+  </p>
+</div>
