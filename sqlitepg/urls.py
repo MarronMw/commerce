@@ -7,7 +7,7 @@ from django.conf import settings  # type: ignore
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('crud/', include('crud.urls')),
-    path('', include("paypal.standard.ipn.urls")),
+    path('', include('crud.urls')),
+    path('paypal/', include("paypal.standard.ipn.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
