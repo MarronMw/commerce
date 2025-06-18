@@ -5,30 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{product.product_name}}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .card {
-            display: flex;
-            flex-direction: column;
-            height: 15rem;
-            width: 10rem;
+        .product-card {
+            width: 18rem;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .img {
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            height: 200px;
             object-fit: cover;
             width: 100%;
-            height: 6rem;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #0d6efd; /* Bootstrap primary blue */
+        }
+
+        .paypal-button {
+            margin-top: 1rem;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <img class="img" src="{{product.image.url}}" alt=" a pic of{{product.name}}">
-        <p>{{product.product_name}}</p>
-        <p>{{product.price}}</p>
-        {{paypal.render}}
-        <!-- <button>buy with Paypal</button> -->
+    <div class="product-card card mx-auto my-4">
+        <!-- Product Image -->
+        <img class="product-img card-img-top" src="{{product.image.url}}" alt="{{product.product_name}}">
+        
+        <!-- Card Body -->
+        <div class="card-body text-center">
+            <!-- Product Name -->
+            <h5 class="product-name card-title">{{product.product_name}}</h5>
+            
+            <!-- Price -->
+            <p class="product-price">${{product.price}}</p>
+            
+            <!-- PayPal Button -->
+            <div class="paypal-button">
+                {{paypal.render}}
+            </div>
+        </div>
     </div>
+
+    <!-- Bootstrap JS (Optional, for interactive elements) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
