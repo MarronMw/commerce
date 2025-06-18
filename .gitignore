@@ -1,8 +1,4 @@
-sqlitepg/*.sqlite3
-sqlitepg/media/*
-.venv/*
-sqlitepg/sqlitepg/__pycache__/*.pyc
-sqlitepg/crud/__pycache__/*.pyc
-sqlitepg/crud/migrations/__pycache__/*.pyc
-migrations/*
-!migrations/_init__.py
+/migrations/*
+!/migrations/_init__.py
+db.sqlite3
+.venv
